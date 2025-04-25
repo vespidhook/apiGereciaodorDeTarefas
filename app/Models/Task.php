@@ -13,12 +13,17 @@ class Task extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
-    protected $fillable = ['id', 'title', 'description', 'is_completed'];
+    protected $fillable = ['id', 'title', 'description', 'is_completed', 'user_id'];
 
     protected static function booted()
     {
         static::creating(function ($task) {
-            $task->id = (string) Str::uuid();
+            $task->id = (string)Str::uuid();
         });
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
