@@ -9,7 +9,6 @@ class TaskController extends Controller
 {
     public function index(Request $request)
     {
-        // Tarefas do usuário logado
         return $request->user()->tasks()->get();
     }
 
@@ -29,13 +28,11 @@ class TaskController extends Controller
             'description' => 'required|string',
         ]);
 
-        // Cria a tarefa associada ao usuário logado
         return $request->user()->tasks()->create($data);
     }
 
     public function update(Request $request, Task $task)
     {
-        // Garante que a tarefa pertence ao usuário
         if ($request->user()->id !== $task->user_id) {
             return response()->json(['message' => 'Acesso não autorizado.'], 403);
         }
