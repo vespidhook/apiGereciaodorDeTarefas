@@ -10,10 +10,6 @@ use App\Models\User;
  * Rotas públicas: registro, login
  */
 
-Route::get('/me', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
-
 Route::post('/register', function (Request $request) {
     $request->validate([
         'name' => 'required|string',
