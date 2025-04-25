@@ -14,6 +14,10 @@ class TaskController extends Controller
 
     public function show(Request $request, Task $task)
     {
+        if (!$task) {
+            return response()->json(['message' => 'Tarefa não encontrada.'], 404);
+        }
+
         if ($task->user_id !== $request->user()->id) {
             return response()->json(['message' => 'Acesso não autorizado.'], 403);
         }
