@@ -15,7 +15,6 @@ class TaskController extends Controller
 
     public function show(Request $request, Task $task)
     {
-        // Garante que a tarefa pertence ao usuário logado
         if ($task->user_id !== $request->user()->id) {
             return response()->json(['message' => 'Acesso não autorizado.'], 403);
         }
